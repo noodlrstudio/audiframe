@@ -3,23 +3,23 @@
 Local evidence collected 11 October 2026, Node 24.11.0 / npm 11.16.0 on macOS.
 This is an alpha implementation record, not stable 1.0 certification.
 
-| Evidence                                                            | Result                                                                                                                       |
-| ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| Clean audiframe npm install, TypeScript, unit/session/adapter tests | PASS: 21 tests                                                                                                               |
-| Golden operation/bootstrap success/error corpus                     | PASS: 89 wire fixtures                                                                                                       |
-| Chromium two-origin runner                                          | PASS: 103 fixture/runtime checks                                                                                             |
-| WebKit two-origin runner                                            | PASS: 103 fixture/runtime checks                                                                                             |
-| Firefox on this Mac                                                 | BLOCKED: launch/profile and OS sandbox failures, including after browser installation                                        |
-| Core browser bundles                                                | Client 8,374 bytes gzip; host 8,178 bytes gzip, below 15 KiB each                                                            |
-| Actual Pulse in independent vanilla host                            | PASS: identity, BPM 137 recall, malformed restore blocks and retry recovers                                                  |
-| Actual Pulse in Noodlr Web App component                            | PASS: saved BPM 143 and origin/app binding; reload recalls 143                                                               |
-| Pulse validation                                                    | PASS: typecheck, 23 tests and production build                                                                               |
-| Noodlr validation                                                   | PASS: typecheck, focused host/appearance tests, source-size smoke, production build; existing warnings remain                |
-| Noodlr format                                                       | `npm run format:write` run; format check passes                                                                              |
-| Audio output                                                        | NOT VERIFIED: automated Pulse analyser returned zero; AudioContext reported running while its measured clock did not advance |
-| Physical Safari/iOS, hardware MIDI, native/DAW recording            | NOT RUN                                                                                                                      |
-| Deployed Pulse/Noodlr sites and npm publication                     | NOT RUN                                                                                                                      |
-| Independent security review and external SDK/host feedback          | OPEN                                                                                                                         |
+| Evidence                                                            | Result                                                                                                                                             |
+| ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Clean audiframe npm install, TypeScript, unit/session/adapter tests | PASS: 21 tests                                                                                                                                     |
+| Golden operation/bootstrap success/error corpus                     | PASS: 89 wire fixtures                                                                                                                             |
+| Chromium two-origin runner                                          | PASS: 103 fixture/runtime checks                                                                                                                   |
+| WebKit two-origin runner                                            | PASS: 103 fixture/runtime checks                                                                                                                   |
+| Firefox on this Mac                                                 | BLOCKED: launch/profile and OS sandbox failures, including after browser installation                                                              |
+| Core browser bundles                                                | Client 8,374 bytes gzip; host 8,178 bytes gzip, below 15 KiB each                                                                                  |
+| Actual Pulse in independent vanilla host                            | PASS: identity, BPM 137 recall, malformed restore blocks and retry recovers                                                                        |
+| Actual Pulse in Noodlr Web App component                            | PASS: saved BPM 143 and origin/app binding; reload recalls 143                                                                                     |
+| Pulse validation                                                    | PASS: typecheck, 23 tests and production build                                                                                                     |
+| Noodlr validation                                                   | PASS: typecheck, 6 focused host/appearance tests, 36 Guest tests, MIDI/document and source-size smokes, production build; existing warnings remain |
+| Noodlr format                                                       | `npm run format:write` run; format check passes                                                                                                    |
+| Audio output                                                        | NOT VERIFIED: automated Pulse analyser returned zero; AudioContext reported running while its measured clock did not advance                       |
+| Physical Safari/iOS, hardware MIDI, native/DAW recording            | NOT RUN                                                                                                                                            |
+| Deployed Pulse/Noodlr sites and npm publication                     | NOT RUN                                                                                                                                            |
+| Independent security review and external SDK/host feedback          | OPEN                                                                                                                                               |
 
 The runner covers golden schemas, actual SDK negotiation/epochs, state round trip,
 failed/future-schema recall, parameter batch rejection and reads after recall,
