@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" /><title>Independent wire fixture</title>
+  <script type="module">
+    // Intentionally independent from every SDK, for adversarial interoperability checks.
+    const mode = new URLSearchParams(location.search).get("mode");
+    window.addEventListener("message", (event) => {
+      if (event.source !== parent || event.origin !== "http://127.0.0.1:4100")
+        return;
+      const b = event.data;
+      if (b?.channel !== "audiframe") return;
+      if (b.type === "connect/offer") {
+        if (mode === "reject") {
+          parent.postMessage(
+            {
+              channel: "audiframe",
+              bootstrap: 1,
+              type: "connect/reject",
+              nonce: b.nonce,
+              payload: { code: "UNSUPPORTED_VERSION" },
+            },
+            event.origin,
+          );
+          return;
+        }
+        parent.postMessage(
+          {
+            channel: "audiframe",
+            bootstrap: 1,
+            type: "connect/accept",
+            nonce: mode === "nonce" ? "b".repeat(32) : b.nonce,
+            payload: {
+              selectedVersion: { major: 1, minor: 0 },
+              app: {
+                id: "org.audiframe.wire-fixture",
+                name: "Wire fixture",
+                appVersion: "0.1.0",
+                protocolVersions: [{ major: 1, minor: 0 }],
+                capabilities: [{ id: "lifecycle", version: 1 }],
+              },
+            },
+          },
+          event.origin,
+        );
+      }
+      if (b.type === "connect/bind") {
+        const port = event.ports[0];
+        if (mode === "timeout") return;
+        const envelope = {
+          channel: "audiframe",
+          version: { major: 1, minor: 0 },
+          sessionId: b.payload.sessionId,
+          seq: 1,
+          kind: "notification",
+          type: "session/ready",
+          payload: { acceptedGrants: ["lifecycle"] },
+        };
+        if (mode === "stale")
+          port.postMessage({
+            ...envelope,
+            sessionId: "stale-session",
+            type: "session/close",
+            payload: { reason: "stale" },
+          });
+        port.postMessage(envelope);
+        if (mode === "flood")
+          for (let seq = 2; seq < 12; seq++)
+            port.postMessage({
+              ...envelope,
+              seq,
+              type: "midi/batch",
+              payload: { events: [] },
+            });
+      }
+    });
+  </script>
+</html>

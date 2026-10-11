@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://audiframe.org/spec/1.0/files-import-input.json",
+  "type": "object",
+  "properties": {
+    "accept": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2048
+      },
+      "maxItems": 32
+    },
+    "multiple": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "accept",
+    "multiple"
+  ]
+}

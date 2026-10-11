@@ -1,0 +1,1 @@
+{"compilerOptions":{"target":"ES2022","module":"ESNext","moduleResolution":"Bundler","strict":true,"declaration":true,"lib":["ES2022","DOM"],"skipLibCheck":true,"paths":{"@audiframe/protocol":["./packages/protocol/src/index.ts"],"@audiframe/client":["./packages/client/src/index.ts"],"@audiframe/host":["./packages/host/src/index.ts"]}},"include":["packages/**/*.ts"]}

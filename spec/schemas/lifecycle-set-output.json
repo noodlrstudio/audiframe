@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://audiframe.org/spec/1.0/lifecycle-set-output.json",
+  "type": "object",
+  "properties": {
+    "applied": {
+      "type": "boolean"
+    },
+    "audioStatus": {
+      "type": "string",
+      "enum": [
+        "locked",
+        "running",
+        "suspended",
+        "unavailable"
+      ]
+    }
+  },
+  "required": [
+    "applied",
+    "audioStatus"
+  ]
+}

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>audiframe · Pulse reference</title
+  ><link rel="stylesheet" href="../style.css" />
+  <main>
+    <h1>Pulse · Chris Thomaidis</h1>
+    <p>
+      The real instrument, independently hosted. Save a pattern, reload the
+      frame, then recall it.
+    </p>
+    <iframe
+      title="Pulse · Chris Thomaidis"
+      sandbox="allow-scripts allow-same-origin"
+      src="http://127.0.0.1:3000/?audiframe=1"
+    ></iframe>
+    <nav>
+      <button id="save" title="Save Pulse patterns">Save</button
+      ><button id="restore" title="Recall saved Pulse patterns">Recall</button
+      ><button id="fresh" title="Activate a fresh Pulse session">
+        Start fresh</button
+      ><button id="note" title="Send a channel 10 drum note">Note</button
+      ><button id="focus" title="Focus the Pulse instrument">
+        Focus instrument</button
+      ><a
+        id="external"
+        target="_blank"
+        rel="noopener"
+        href="http://127.0.0.1:3000/"
+        >Open Pulse</a
+      >
+    </nav>
+    <output aria-live="polite"></output>
+  </main>
+  <script type="module" src="pulse-host.js"></script>
+</html>

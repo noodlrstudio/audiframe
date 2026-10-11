@@ -1,0 +1,19 @@
+{
+  "name": "@audiframe/protocol",
+  "version": "0.1.0-alpha.1",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/protocol/src/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://audiframe.org/spec/1.0/ui-resize-input.json",
+  "type": "object",
+  "properties": {
+    "width": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "height": {
+      "type": "integer",
+      "minimum": 1
+    }
+  },
+  "required": [
+    "width",
+    "height"
+  ]
+}

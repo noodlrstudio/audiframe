@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://audiframe.org/spec/1.0/transport-update-input.json",
+  "type": "object",
+  "properties": {
+    "timelineId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "discontinuity": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "stopped",
+        "playing",
+        "paused"
+      ]
+    },
+    "capturedAtMs": {
+      "type": "number"
+    },
+    "effectiveAtMs": {
+      "type": "number"
+    },
+    "positionSeconds": {
+      "type": "number"
+    },
+    "positionBeats": {
+      "type": "number"
+    },
+    "bpm": {
+      "type": "number",
+      "minimum": 0.001
+    },
+    "timeSignature": {
+      "type": "object",
+      "properties": {
+        "numerator": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32
+        },
+        "denominator": {
+          "type": "integer",
+          "enum": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32
+          ]
+        }
+      },
+      "required": [
+        "numerator",
+        "denominator"
+      ]
+    },
+    "loop": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "startBeats": {
+              "type": "number"
+            },
+            "endBeats": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "startBeats",
+            "endBeats"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "timelineId",
+    "discontinuity",
+    "state",
+    "capturedAtMs",
+    "effectiveAtMs",
+    "positionSeconds",
+    "positionBeats",
+    "bpm",
+    "timeSignature",
+    "loop"
+  ]
+}

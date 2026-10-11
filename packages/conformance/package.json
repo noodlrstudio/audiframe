@@ -1,0 +1,25 @@
+{
+  "name": "@audiframe/conformance",
+  "version": "0.1.0-alpha.1",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "@audiframe/protocol": "0.1.0-alpha.1"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/types/conformance/src/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "audiframe-conformance": "./dist/cli.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

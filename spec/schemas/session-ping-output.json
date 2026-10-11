@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://audiframe.org/spec/1.0/session-ping-output.json",
+  "type": "object",
+  "properties": {
+    "receivedAtMs": {
+      "type": "number"
+    },
+    "sentAtMs": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "receivedAtMs",
+    "sentAtMs"
+  ]
+}

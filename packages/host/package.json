@@ -1,0 +1,22 @@
+{
+  "name": "@audiframe/host",
+  "version": "0.1.0-alpha.1",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "@audiframe/protocol": "0.1.0-alpha.1"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/types/host/src/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

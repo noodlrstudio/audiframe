@@ -1,0 +1,32 @@
+{
+  "name": "audiframe-workspace",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "packageManager": "npm@11.16.0",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "tsc --noEmit",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "conformance": "node packages/conformance/dist/cli.js",
+    "dev": "node scripts/serve.mjs",
+    "size": "node scripts/size.mjs",
+    "schemas": "npm run build && node scripts/schemas.mjs",
+    "fixtures": "npm run build && node scripts/fixtures.mjs",
+    "format:write": "prettier --write 'packages/*/src/**/*.ts' '!packages/protocol/src/generated.ts' scripts tests examples packages/conformance/browser docs README.md CONTRIBUTING.md SECURITY.md spec/rfcs",
+    "format:check": "prettier --check 'packages/*/src/**/*.ts' '!packages/protocol/src/generated.ts' scripts tests examples packages/conformance/browser docs README.md CONTRIBUTING.md SECURITY.md spec/rfcs",
+    "test:browser": "node scripts/browser-check.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "esbuild": "^0.25.0",
+    "prettier": "3.8.1",
+    "typescript": "~5.8.3"
+  }
+}

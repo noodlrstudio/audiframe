@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://audiframe.org/spec/1.0/connect-accept.json",
+  "type": "object",
+  "properties": {
+    "selectedVersion": {
+      "type": "object",
+      "properties": {
+        "major": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "minor": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "major",
+        "minor"
+      ]
+    },
+    "app": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$",
+          "maxLength": 256
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "appVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][a-zA-Z0-9.-]+)?$"
+        },
+        "protocolVersions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "major": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "minor": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "major",
+              "minor"
+            ]
+          },
+          "maxItems": 16
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2048
+              },
+              "version": {
+                "const": 1
+              },
+              "options": {
+                "type": "object"
+              },
+              "required": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "id",
+              "version"
+            ]
+          },
+          "maxItems": 32
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2048
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2048
+              },
+              "direction": {
+                "type": "string",
+                "enum": [
+                  "in",
+                  "out"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "midi1",
+                  "event"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "label",
+              "direction",
+              "type"
+            ]
+          },
+          "maxItems": 32
+        },
+        "stateSchemas": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "schemaId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2048
+              },
+              "writableVersion": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "readableVersions": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "maxItems": 32
+              }
+            },
+            "required": [
+              "schemaId",
+              "writableVersion",
+              "readableVersions"
+            ]
+          },
+          "maxItems": 32
+        },
+        "ui": {
+          "type": "object",
+          "properties": {
+            "minWidth": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "minHeight": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "preferredWidth": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "preferredHeight": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "maxWidth": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "maxHeight": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "resizable": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "minWidth",
+            "minHeight",
+            "preferredWidth",
+            "preferredHeight",
+            "resizable"
+          ]
+        },
+        "links": {
+          "type": "object"
+        },
+        "extensions": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "appVersion",
+        "protocolVersions",
+        "capabilities"
+      ]
+    }
+  },
+  "required": [
+    "selectedVersion",
+    "app"
+  ]
+}

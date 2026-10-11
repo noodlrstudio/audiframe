@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://audiframe.org/spec/1.0/lifecycle-set-input.json",
+  "type": "object",
+  "properties": {
+    "mode": {
+      "type": "string",
+      "enum": [
+        "active",
+        "suspended",
+        "dispose"
+      ]
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "audible": {
+      "type": "boolean"
+    },
+    "midiOutputEnabled": {
+      "type": "boolean"
+    },
+    "visible": {
+      "type": "boolean"
+    },
+    "stateEpoch": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    }
+  },
+  "required": [
+    "mode",
+    "enabled",
+    "audible",
+    "midiOutputEnabled",
+    "visible"
+  ]
+}

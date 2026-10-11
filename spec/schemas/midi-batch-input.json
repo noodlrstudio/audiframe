@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://audiframe.org/spec/1.0/midi-batch-input.json",
+  "type": "object",
+  "properties": {
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "portId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 255
+            },
+            "maxItems": 3
+          },
+          "atMs": {
+            "type": "number"
+          },
+          "routeId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "hops": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "id",
+          "portId",
+          "data"
+        ]
+      },
+      "maxItems": 256
+    }
+  },
+  "required": [
+    "events"
+  ]
+}
