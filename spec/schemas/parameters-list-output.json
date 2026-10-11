@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://audiframe.org/spec/1.0/parameters-list-output.json",
+  "type": "object",
+  "properties": {
+    "descriptors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "float",
+              "int",
+              "bool",
+              "enum"
+            ]
+          },
+          "minValue": {
+            "type": "number"
+          },
+          "maxValue": {
+            "type": "number"
+          },
+          "defaultValue": {
+            "type": "number"
+          },
+          "unit": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "step": {
+            "type": "number",
+            "minimum": 0.000001
+          },
+          "choices": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "number"
+                },
+                "label": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2048
+                }
+              },
+              "required": [
+                "value",
+                "label"
+              ]
+            },
+            "maxItems": 256
+          },
+          "automatable": {
+            "type": "boolean"
+          },
+          "readOnly": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "type",
+          "minValue",
+          "maxValue",
+          "defaultValue",
+          "automatable",
+          "readOnly"
+        ]
+      },
+      "maxItems": 256
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "descriptors",
+    "revision"
+  ]
+}

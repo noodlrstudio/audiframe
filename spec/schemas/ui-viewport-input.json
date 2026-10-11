@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://audiframe.org/spec/1.0/ui-viewport-input.json",
+  "type": "object",
+  "properties": {
+    "width": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "height": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "devicePixelRatio": {
+      "type": "number",
+      "minimum": 0.01
+    },
+    "visible": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "width",
+    "height",
+    "devicePixelRatio",
+    "visible"
+  ]
+}

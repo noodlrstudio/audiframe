@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://audiframe.org/spec/1.0/events-batch-input.json",
+  "type": "object",
+  "properties": {
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "portId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "eventType": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "data": {},
+          "atMs": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "portId",
+          "eventType",
+          "data"
+        ]
+      },
+      "maxItems": 256
+    }
+  },
+  "required": [
+    "events"
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://audiframe.org/spec/1.0/envelope.json",
+  "type": "object",
+  "properties": {
+    "channel": {
+      "const": "audiframe"
+    },
+    "version": {
+      "type": "object",
+      "properties": {
+        "major": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "minor": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "major",
+        "minor"
+      ]
+    },
+    "sessionId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "request",
+        "response",
+        "notification"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "requestId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "payload": {},
+    "error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "details": {}
+      },
+      "required": [
+        "code",
+        "message",
+        "retryable"
+      ]
+    }
+  },
+  "required": [
+    "channel",
+    "version",
+    "sessionId",
+    "seq",
+    "kind",
+    "type"
+  ],
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "notification"
+        },
+        "payload": {}
+      },
+      "required": [
+        "kind",
+        "payload"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {},
+            "required": [
+              "requestId"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {},
+            "required": [
+              "error"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "request"
+        },
+        "payload": {},
+        "requestId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "kind",
+        "payload",
+        "requestId"
+      ],
+      "not": {
+        "type": "object",
+        "properties": {},
+        "required": [
+          "error"
+        ]
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "response"
+        },
+        "payload": {},
+        "requestId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "kind",
+        "payload",
+        "requestId"
+      ],
+      "not": {
+        "type": "object",
+        "properties": {},
+        "required": [
+          "error"
+        ]
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "response"
+        },
+        "error": {},
+        "requestId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "kind",
+        "error",
+        "requestId"
+      ],
+      "not": {
+        "type": "object",
+        "properties": {},
+        "required": [
+          "payload"
+        ]
+      }
+    }
+  ]
+}

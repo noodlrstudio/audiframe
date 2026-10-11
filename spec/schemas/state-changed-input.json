@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://audiframe.org/spec/1.0/state-changed-input.json",
+  "type": "object",
+  "properties": {
+    "snapshot": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "schemaId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "schemaVersion": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "data": {},
+        "assets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2048
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "size": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "mimeType": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2048
+              }
+            },
+            "required": [
+              "id",
+              "sha256",
+              "size",
+              "mimeType"
+            ]
+          },
+          "maxItems": 128
+        }
+      },
+      "required": [
+        "appId",
+        "schemaId",
+        "schemaVersion",
+        "data"
+      ]
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "epoch": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    }
+  },
+  "required": [
+    "snapshot",
+    "revision",
+    "epoch"
+  ]
+}

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>audiframe · independent host</title
+  ><link rel="stylesheet" href="../style.css" />
+  <main>
+    <h1>audiframe</h1>
+    <p>An independent host. The instrument lives on another origin.</p>
+    <iframe
+      title="Eight steps instrument"
+      sandbox="allow-scripts allow-same-origin"
+      src="http://127.0.0.1:4101/examples/minimal-app/"
+    ></iframe>
+    <nav>
+      <button id="save" title="Capture the instrument's current pattern">
+        Save</button
+      ><button id="restore" title="Restore the last saved pattern">
+        Recall</button
+      ><button id="fresh" title="Activate without a saved pattern">
+        Start fresh</button
+      ><button id="note" title="Send a channel 10 note">Note</button
+      ><button id="focus" title="Move keyboard focus into the instrument">
+        Focus instrument</button
+      ><a
+        id="external"
+        target="_blank"
+        rel="noopener"
+        href="http://127.0.0.1:4101/examples/minimal-app/"
+        >Open instrument</a
+      >
+    </nav>
+    <output aria-live="polite"></output>
+    <p>
+      <a href="../../packages/conformance/browser/">Run conformance checks</a>
+    </p>
+  </main>
+  <script type="module" src="host.js"></script>
+</html>

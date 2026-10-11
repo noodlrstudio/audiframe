@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://audiframe.org/spec/1.0/files-export-input.json",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "mimeType": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "size": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "name",
+    "mimeType",
+    "size"
+  ]
+}

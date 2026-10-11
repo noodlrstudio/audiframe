@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://audiframe.org/spec/1.0/ui-appearance-input.json",
+  "type": "object",
+  "properties": {
+    "theme": {
+      "type": "string",
+      "enum": [
+        "light",
+        "dark",
+        "system"
+      ]
+    },
+    "reducedMotion": {
+      "type": "boolean"
+    },
+    "contrast": {
+      "type": "string",
+      "enum": [
+        "normal",
+        "more",
+        "less"
+      ]
+    },
+    "accent": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    }
+  },
+  "required": [
+    "theme",
+    "reducedMotion",
+    "contrast"
+  ]
+}
