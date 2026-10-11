@@ -117,6 +117,33 @@ export async function run() {
       const response = await host.request("parameters/get", { ids: ["level"] });
       assert(response.values[0].value === 0.6, "Stale parameter after recall");
     });
+    await check(
+      "restore applies a disabled policy without activating",
+      async () => {
+        const suspended = {
+          mode: "suspended",
+          enabled: false,
+          audible: false,
+          midiOutputEnabled: false,
+          visible: true,
+        };
+        await host.restore(original, { lifecycle: suspended });
+        assert(host.state === "suspended", "Restore activated a disabled app");
+        await host.startFresh({ lifecycle: suspended });
+        assert(
+          host.state === "suspended",
+          "Fresh start activated a disabled app",
+        );
+        await host.setLifecycle({
+          ...suspended,
+          mode: "active",
+          enabled: true,
+          audible: true,
+          midiOutputEnabled: true,
+        });
+        assert(host.state === "active", "Not reactivated");
+      },
+    );
     await check("grant revocation denies performance traffic", async () => {
       host.narrowGrants(host.grants.filter((g) => g.id !== "midi.input"));
       try {

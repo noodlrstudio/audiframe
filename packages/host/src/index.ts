@@ -48,6 +48,18 @@ export interface HostOptions {
     (payload: Json, signal: AbortSignal) => Json | Promise<Json>
   >;
 }
+/** Board policy applied atomically when restore/startFresh activates the app. */
+export type ActivationPolicy = Omit<Lifecycle, "stateEpoch">;
+export interface ActivationOptions extends RequestOptions {
+  lifecycle?: ActivationPolicy;
+}
+const ACTIVE: ActivationPolicy = {
+  mode: "active",
+  enabled: true,
+  audible: true,
+  midiOutputEnabled: true,
+  visible: true,
+};
 export function createHostSession(options: HostOptions) {
   const origin = originOf(options.url, options.development);
   if (origin === window.location.origin)
@@ -342,7 +354,7 @@ export function createHostSession(options: HostOptions) {
     get grants() {
       return session?.grants ?? [];
     },
-    async restore(snapshot: Snapshot, opts?: RequestOptions) {
+    async restore(snapshot: Snapshot, opts?: ActivationOptions) {
       const current = requireSession();
       validateSnapshot(snapshot, manifest!);
       const g = ++generation;
@@ -350,41 +362,29 @@ export function createHostSession(options: HostOptions) {
       epoch = "";
       change("restoring");
       try {
+        const { lifecycle, ...request } = opts ?? {};
         const r = await current.request<{ epoch: string; revision: number }>(
           "state/set",
           { snapshot: snapshot as unknown as Json, epoch: next },
-          opts,
+          request,
         );
         if (g !== generation || current !== session)
           throw new AudiframeError("DISCONNECTED");
         if (r.epoch !== next) throw new AudiframeError("STALE_EPOCH");
         epoch = next;
         revision = r.revision;
-        await api.setLifecycle({
-          mode: "active",
-          enabled: true,
-          audible: true,
-          midiOutputEnabled: true,
-          visible: true,
-        });
+        await api.setLifecycle(lifecycle ?? ACTIVE);
       } catch (e) {
         if (g === generation) change("restore-blocked");
         throw e;
       }
     },
-    async startFresh(opts?: RequestOptions) {
+    async startFresh({ lifecycle, ...opts }: ActivationOptions = {}) {
       epoch = id();
       revision = -1;
       generation++;
       await api.setLifecycle(
-        {
-          mode: "active",
-          enabled: true,
-          audible: true,
-          midiOutputEnabled: true,
-          visible: true,
-          stateEpoch: epoch,
-        },
+        { ...(lifecycle ?? ACTIVE), stateEpoch: epoch },
         opts,
       );
     },
