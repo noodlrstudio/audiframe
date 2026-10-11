@@ -69,6 +69,10 @@ const snapshot = await host.getState({
 ```
 
 `restore()` waits for atomic state acknowledgement and then activates performance.
+Pass `{ lifecycle }` to `restore()` or `startFresh()` when the embedding is
+disabled or muted, so the first lifecycle the app sees already carries that
+policy (for example `mode: "suspended"`, `audible: false`) instead of a brief
+active, audible window before a corrective `setLifecycle()`.
 Failure preserves saved state; retry or explicit `startFresh()` is needed.
 `invalidateState()` blocks host traffic and invalidates pending capture after undo
 or document replacement. `close()`/`dispose()` reject pending calls, close ports,
