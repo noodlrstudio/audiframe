@@ -284,6 +284,7 @@ Run Chromium, Firefox and WebKit browser suites; manually verify current Safari 
 | A10 | Optional files profile and experimental assets RFC; cancellation/quota/durability verified | A04,A09 |
 | A11 | WebAudioHub manifest examples, open JSON schema, public cacheable catalogue contract | A02,A09 |
 | A12 | WAM/Wafer proof adapters and WebCLAP design spike; publish truthful loss matrices | A09 |
+| A13 | Experimental audio output route ([RFC 0002](spec/rfcs/0002-audio-output.md)); prototype `pcm-port` and `webrtc`, publish measured latency/dropout evidence; not a 1.0 gate | A06,A09 |
 
 Draft 0.1 gate: A01–A04, minimal independent host, published schema changes allowed. Alpha gate: A05–A08 and Noodlr opt-in integration; legacy remains available. Beta gate: A09, security review, Pulse on two hosts, third-party implementation feedback, browser evidence and rollback test. Stable 1.0 gate: core and shipped optional profiles have frozen wire fixtures, migration/deprecation policy and at least two independent host implementations (Noodlr plus vanilla reference; seek an externally authored host before claiming broad adoption). Do not block core release on experimental assets or all future adapters. Do not badge unimplemented profiles.
 
