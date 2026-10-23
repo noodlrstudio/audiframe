@@ -37,9 +37,10 @@ and WebKit use the same runner. CI uploads reports for each engine.
 
 Packages are ESM with TypeScript declarations. `npm run build` also produces
 self-contained browser modules in each package's `dist/index.js`. Serve your
-own pinned copies. Build and `npm pack -w @audiframe/client` to consume locally.
-The packages are not yet published to npm; names and ownership need checking
-before the first release. Each host/client bundle is checked against 15 KiB gzip.
+own pinned copies. `@audiframe/protocol`, `client` and `host` are on npm under
+the `alpha` dist-tag (pin an exact version: alphas can break); pushing a
+`v<version>` tag publishes them from `release.yml` with trusted publishing.
+Each host/client bundle is checked against 15 KiB gzip.
 
 Read [SDK usage](docs/sdk.md), [protocol inventory](spec/README.md),
 [integration guide](docs/integrations.md), [release evidence](docs/validation.md),

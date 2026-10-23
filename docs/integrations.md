@@ -35,10 +35,10 @@ same actual Web App component. In development, use
 verify the snapshot and origin binding. Its storage is local sessionStorage;
 normal board persistence continues through existing document save callbacks.
 
-Package archives in each consuming repo's vendor/audiframe directory make the
-alpha reproducible without npm publishing, sibling absolute paths or a CDN.
-The archives include MIT notices. Replace them with pinned registry releases
-once package names/ownership and the release workflow are approved.
+Consuming repos install exact pinned versions from npm (for example
+`"@audiframe/client": "0.1.0-alpha.2"`). Package archives in a repo's
+vendor/audiframe directory, as the first integrations used, can be replaced
+with those registry releases.
 
 No Supabase migration, Edge Function, bucket, secret or configuration action is
 needed for this opt-in integration. The existing opaque board JSON stores the
