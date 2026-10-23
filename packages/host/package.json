@@ -3,6 +3,11 @@
   "version": "0.1.0-alpha.1",
   "type": "module",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noodlrstudio/audiframe.git",
+    "directory": "packages/host"
+  },
   "files": [
     "dist",
     "LICENSE"

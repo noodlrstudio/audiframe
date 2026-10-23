@@ -1,0 +1,60 @@
+name: Release
+# Pushing a tag such as v0.1.0-alpha.2 publishes @audiframe/protocol, client and host
+# to npm with trusted publishing (OIDC, no stored token) and provenance. The tag must
+# match VERSION in scripts/build.mjs. A prerelease goes out under its own dist-tag
+# (alpha), so `npm install @audiframe/client` never picks it up by default.
+on:
+  push:
+    tags: ["v*"]
+permissions:
+  contents: read
+  id-token: write
+concurrency:
+  group: release
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      # Trusted publishing needs npm 11.5.1 or later.
+      - run: npm install -g npm@11.16.0
+      - run: npm ci
+      # Same gate as CI; npm test also builds the packages.
+      - run: npm run check && npm test && npm run size
+      - name: Check committed manifests match the build
+        run: git diff --exit-code -- 'packages/*/package.json'
+      - name: Check the tag matches the version
+        id: version
+        run: |
+          version=$(node -p 'require("./packages/protocol/package.json").version')
+          if [ "$GITHUB_REF_NAME" != "v$version" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME doesn't match version $version in scripts/build.mjs"
+            exit 1
+          fi
+          case "$version" in
+            *-*) tag=${version#*-}; tag=${tag%%.*} ;;
+            *) tag=latest ;;
+          esac
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+      # Protocol first: client and host name it as a peer dependency. A version that's
+      # already on npm is skipped, so a run that failed part way can be re-run.
+      - name: Publish
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          for name in protocol client host; do
+            pkg="@audiframe/$name"
+            if npm view "$pkg@$VERSION" version >/dev/null 2>&1; then
+              echo "$pkg@$VERSION is already published"
+              continue
+            fi
+            npm publish -w "$pkg" --tag "$TAG"
+          done
