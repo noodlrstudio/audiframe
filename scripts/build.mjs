@@ -1,6 +1,8 @@
 import { build } from "esbuild";
 import { execFileSync } from "node:child_process";
 import { mkdirSync, writeFileSync, copyFileSync } from "node:fs";
+// Every package ships at this version; the release workflow checks its tag against it.
+const VERSION = "0.1.0-alpha.1";
 for (const name of [
   "protocol",
   "client",
@@ -39,13 +41,19 @@ for (const name of [
     JSON.stringify(
       {
         name: `@audiframe/${name}`,
-        version: "0.1.0-alpha.1",
+        version: VERSION,
         type: "module",
         license: "MIT",
+        // npm trusted publishing needs this to match the publishing repository.
+        repository: {
+          type: "git",
+          url: "git+https://github.com/noodlrstudio/audiframe.git",
+          directory: `packages/${name}`,
+        },
         files: ["dist", "LICENSE"],
         ...(name === "protocol"
           ? {}
-          : { peerDependencies: { "@audiframe/protocol": "0.1.0-alpha.1" } }),
+          : { peerDependencies: { "@audiframe/protocol": VERSION } }),
         exports: {
           ".": {
             types: `./dist/types/${name}/src/index.d.ts`,
