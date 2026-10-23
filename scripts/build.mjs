@@ -2,7 +2,7 @@ import { build } from "esbuild";
 import { execFileSync } from "node:child_process";
 import { mkdirSync, writeFileSync, copyFileSync } from "node:fs";
 // Every package ships at this version; the release workflow checks its tag against it.
-const VERSION = "0.1.0-alpha.1";
+const VERSION = "0.1.0-alpha.2";
 for (const name of [
   "protocol",
   "client",
