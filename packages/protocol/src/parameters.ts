@@ -1,6 +1,6 @@
-import { AudiframeError, type Parameter, type Json } from "./types";
-import { assertSchema, arr } from "./schema";
-import { parameterSchema } from "./operations";
+import { AudiframeError, type Parameter, type Json } from "./types.js";
+import { assertSchema, arr } from "./schema.js";
+import { parameterSchema } from "./operations.js";
 export function validateParameters(descriptors: Parameter[]): void {
   assertSchema(arr(parameterSchema), descriptors);
   if (new Set(descriptors.map((p) => p.id)).size !== descriptors.length)

@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+- Type declarations work with `"module": "NodeNext"`. Relative imports in the
+  packages now carry `.js` extensions, so the emitted `.d.ts` files no longer
+  re-export from extensionless paths (`export * from "./types"`), which
+  NodeNext couldn't follow: in ESM TypeScript projects every
+  `@audiframe/protocol` export looked missing. No runtime, API or protocol
+  change; bundles are the same size. `tests/types.test.mjs` type-checks a
+  NodeNext consumer against all five packages.
+
 ## 0.1.0-alpha.2 (2026-10-23)
 
 First release published by the Release workflow (`release.yml`) with npm

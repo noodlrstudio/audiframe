@@ -7,7 +7,7 @@ import {
   type Manifest,
   type Limits,
   type Snapshot,
-} from "./types";
+} from "./types.js";
 import {
   assertSchema,
   jsonBytes,
@@ -21,8 +21,8 @@ import {
   arr,
   num,
   type Schema,
-} from "./schema";
-import { OPERATIONS } from "./operations";
+} from "./schema.js";
+import { OPERATIONS } from "./operations.js";
 export const limitsSchema = obj(
   Object.fromEntries(
     Object.entries(LIMITS).map(([k, v]) => [

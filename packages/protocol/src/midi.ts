@@ -3,7 +3,7 @@ import {
   type MidiEvent,
   type Manifest,
   type Grant,
-} from "./types";
+} from "./types.js";
 export function validateMidi(data: number[]): void {
   const status = data[0];
   const length =
