@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.0-alpha.3 (2026-11-13)
 
 - Type declarations work with `"module": "NodeNext"`. Relative imports in the
   packages now carry `.js` extensions, so the emitted `.d.ts` files no longer

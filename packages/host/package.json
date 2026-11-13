@@ -1,6 +1,6 @@
 {
   "name": "@audiframe/host",
-  "version": "0.1.0-alpha.2",
+  "version": "0.1.0-alpha.3",
   "type": "module",
   "license": "MIT",
   "repository": {
@@ -13,7 +13,7 @@
     "LICENSE"
   ],
   "peerDependencies": {
-    "@audiframe/protocol": "0.1.0-alpha.2"
+    "@audiframe/protocol": "0.1.0-alpha.3"
   },
   "exports": {
     ".": {

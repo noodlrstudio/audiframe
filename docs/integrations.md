@@ -36,7 +36,7 @@ verify the snapshot and origin binding. Its storage is local sessionStorage;
 normal board persistence continues through existing document save callbacks.
 
 Consuming repos install exact pinned versions from npm (for example
-`"@audiframe/client": "0.1.0-alpha.2"`). Package archives in a repo's
+`"@audiframe/client": "0.1.0-alpha.3"`). Package archives in a repo's
 vendor/audiframe directory, as the first integrations used, can be replaced
 with those registry releases.
 
