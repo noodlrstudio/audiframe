@@ -5,9 +5,9 @@ import {
   type Manifest,
   type Grant,
   type Json,
-} from "./types";
-import { validateMidi } from "./midi";
-import { assertSchema, type Schema } from "./schema";
+} from "./types.js";
+import { validateMidi } from "./midi.js";
+import { assertSchema, type Schema } from "./schema.js";
 export class MidiScheduler {
   private timers = new Set<ReturnType<typeof setTimeout>>();
   private pendingNotes = new Map<string, Set<ReturnType<typeof setTimeout>>>();

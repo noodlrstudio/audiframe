@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { report, type Fixture } from "./index";
+import { report, type Fixture } from "./index.js";
 const path = process.argv[2] ?? "spec/fixtures/core.json";
 const result = report(JSON.parse(readFileSync(path, "utf8")) as Fixture[], {
   runtime: process.version,

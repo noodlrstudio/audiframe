@@ -1,4 +1,4 @@
-import type { Timeline } from "./types";
+import type { Timeline } from "./types.js";
 export interface ClockSample {
   offsetMs: number;
   rttMs: number;

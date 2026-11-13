@@ -8,10 +8,10 @@ import {
   type Grant,
   type Json,
   type Limits,
-} from "./types";
-import { parseEnvelope } from "./validate";
-import { capabilityFor, OPERATIONS } from "./operations";
-import { assertSchema } from "./schema";
+} from "./types.js";
+import { parseEnvelope } from "./validate.js";
+import { capabilityFor, OPERATIONS } from "./operations.js";
+import { assertSchema } from "./schema.js";
 export type Handler = (
   payload: Json,
   signal: AbortSignal,

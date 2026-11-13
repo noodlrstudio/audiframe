@@ -9,7 +9,7 @@ import {
   snapshotSchema,
   grantSchema,
   type Schema,
-} from "./schema";
+} from "./schema.js";
 export interface Operation {
   sender: "host" | "client" | "either";
   kind: "request" | "notification";

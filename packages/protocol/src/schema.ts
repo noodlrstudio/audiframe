@@ -1,4 +1,4 @@
-import { AudiframeError } from "./types";
+import { AudiframeError } from "./types.js";
 export type Schema = {
   type?: string;
   const?: unknown;
